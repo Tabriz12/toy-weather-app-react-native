@@ -5,16 +5,31 @@ import IconText from "../components/IconText";
 
 const City = () => {
 
-
+    const {container, allComps, imageLayout, suns, cityText, popStyle } = styles
     return (
 
-        <View style = {styles.container} >
-            <ImageBackground source={require("../../assets/wallpaperflare_wallpaper.jpg")} style={styles.imageLayout}>
+        <View style = {container} >
+            <ImageBackground source={require("../../assets/asia-3713473_1920.jpg")} 
+            style={imageLayout} >
 
-                <View style = {styles.comps}>
+                <View style = {allComps}>
+
+                    <Text style = {cityText}>Tokyo</Text>
+                    
+                    <IconText iconName = {'user'} 
+                      iconSize = {50}
+                      iconColor = {'white'}
+                      text = {'3.4M'} 
+                      itemStyle = {popStyle}></IconText> 
+
+                    <View style= {suns}>
+
+                        <IconText iconName = {'sunrise'} iconSize = {50} iconColor = {'white'} text = {'6:43 AM'}></IconText>
+                        <IconText iconName = {'sunset'} iconSize = {50} iconColor = {'white'} text = {'8:28 PM'}></IconText>
+                    
+                    </View>
 
                     
-                    <IconText iconName = {'user'} iconSize = {50} iconColor = {'white'} text = {'3.2M'}></IconText>
 
 
                 </View>
@@ -43,12 +58,35 @@ styles = StyleSheet.create({
         
     },
     imageLayout:{
-        flex:1
+        flex:1,
+        width: '100%',
+        height: '100%'
+        //
     },
-    comps: {
+    allComps: {
         paddingTop:25,
-        alignItems:'center',
-        flex:1
+        justifyContent:'center',
+        alignItems:'center',  
+
+    },
+
+    suns: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop:20,
+        width: '80%'
+
+
+    },
+
+    cityText: {
+        marginTop: 25,
+        fontSize:30,
+        color: 'white'
+    },
+    popStyle: {
+        flexDirection: 'row',
+        marginTop:25
 
     }
 
