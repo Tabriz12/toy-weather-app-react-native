@@ -7,14 +7,17 @@ import {Feather} from '@expo/vector-icons'
 
 const IconText = (props) => {
 
-    const {iconName, iconSize, iconColor, text} = props
+    const {iconName, iconSize, iconColor, text, itemStyle } = props
+
+    const {container, txtTheme} = iconStyles
 
     return(
 
-        <View style={styles.container}>
+        <View style = {[container, itemStyle]}>
             
             <Feather name= {iconName} size = {iconSize} color = {iconColor}/>
-            <Text style = {styles.textstyle}>{text}</Text>
+            <Text style = {txtTheme }>{text}</Text>
+            
 
         </View>
         
@@ -25,19 +28,15 @@ const IconText = (props) => {
 }
 
 
-styles = StyleSheet.create({
-
+iconStyles = StyleSheet.create({
     container:{
-        flexDirection:'row',
-        alignItems:'center',
-        
-
+        alignItems: 'center',
+        //
     },
 
-    textstyle:{
-
-        fontSize:30,
-        color:'white'
+    txtTheme:{
+        fontSize:20,
+        color:'white',
     }
 })
 
