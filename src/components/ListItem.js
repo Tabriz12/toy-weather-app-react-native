@@ -1,24 +1,34 @@
 import React from "react"
 import {Feather} from '@expo/vector-icons'
 import { View, Text, StyleSheet } from "react-native"
+import { weatherType } from "../utilities/WeatherType"
+import moment from "moment"
+
 
 
 const ListItem = (props) => {
 
     const {condition, min, max, dt_txt} = props
 
-    const { item, temp, date, tempContainer} = styles
+    const { items, temp, date, tempContainer, timeWrap, test} = styles
+
+    
 
     return(
 
-        <View style = {item}>
+        <View style = {items} >
 
-            <Feather name={'sun'} color={'white'} size={50}/>
-            <Text style = {date}> {dt_txt}</Text>
-            <View style={tempContainer}>
-                <Text style={temp}> {min} </Text>
-                <Text style={temp}>{max}</Text>
-            </View>
+            
+            
+                <Feather name={weatherType[condition].icon} color={'white'} size={50}/>
+
+                <View style = {timeWrap}>
+                    <Text style = {date}> {moment(dt_txt).format('dddd')}</Text>
+                    <Text style = {date}> {moment(dt_txt).format('h:mm:ss a')}</Text>
+                </View>
+                <View style={tempContainer}>
+                    <Text style={temp}> {`${Math.round(min)}°/${Math.round(max)}°`} </Text>
+                </View>
             
             
             
@@ -29,7 +39,7 @@ const ListItem = (props) => {
  }
 
 const styles = StyleSheet.create({
-    item: {
+    items: {
         backgroundColor:'pink',
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -40,6 +50,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
 
     },
+
+    
+    timeWrap:{
+        flexDirection:'column'
+    },
+
+    
 
     temp:{
         color: 'white',
@@ -53,8 +70,8 @@ const styles = StyleSheet.create({
 
     tempContainer: {
         flexDirection: 'row', // Display min and max temperatures in a row
-        justifyContent: 'space-between', // Add space between min and max temperatures
-        flex: 1, // Take up remaining horizontal space
+        //justifyContent: 'space-between', // Add space between min and max temperatures
+         // Take up remaining horizontal space
       }
 
 })

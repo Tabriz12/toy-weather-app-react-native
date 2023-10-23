@@ -1,26 +1,38 @@
 import React from "react";
 import {View, Text, StyleSheet} from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { weatherType } from "../utilities/WeatherType";
 
-const WeatherApp = () => {
+const WeatherApp = ({weatherData}) => {
 
 
-  const {container, temp, feels, highLow, highLowWrapper, bodyWrapper, description} = styles
+  const {container, tempStyles, feels, highLow, highLowWrapper, bodyWrapper, description} = styles
+  const {main: {temp, feels_like, temp_max, temp_min}, weather } = weatherData
+
+  const weatherCondition = weather[0].main
+
+  console.log(weatherData)
   return (
     
-      <View style = {container}>
+      <View style = {[container, {backgroundColor: weatherType[weatherCondition].color}]}>
 
-        <Text> Current Weather</Text>
-        <Text style = {temp}> 8°</Text>
-        <Feather name="sun" size={80} color="black" />
-        <Text style = {feels}>Feels like 5°</Text>
+        <Text style = {{fontSize:24}}> Current Weather</Text>
+
+        <Text style = {tempStyles}> {`${temp}°`}</Text>
+
+        <Feather name={weatherType[weatherCondition].icon} size={80} color="white" />
+
+        <Text style = {feels}>{`Feels like ${feels_like}°`}</Text>
+
         <View style = {highLowWrapper}>
-          <Text style = {highLow}>High: 9° </Text>
-          <Text style = {highLow}>Low: 6°</Text>
+
+          <Text style = {highLow}>{`High: ${temp_max}°`} </Text>
+          <Text style = {highLow}>{`Low: ${temp_min}°`}</Text>
 
         </View>
+
         <View style = {bodyWrapper}>
-          <Text style = {description}> It is a nice weather</Text>
+          <Text style = {description}> {weather[0].description} </Text>
         </View>
         
       </View>
@@ -34,7 +46,7 @@ const WeatherApp = () => {
 
 const styles  = StyleSheet.create({
   container : {
-    backgroundColor:'pink',
+    
     flex: 1,
     alignItems: 'center',
     padding:25
@@ -44,7 +56,7 @@ const styles  = StyleSheet.create({
     flex: 1
   },
 
-  temp: {
+  tempStyles: {
     color: 'black',
     fontSize: 48
   },
@@ -54,22 +66,25 @@ const styles  = StyleSheet.create({
   },
 
   highLow: {
-    fontSize: 20,
+    fontSize: 25,
     color: 'black'
   },
 
   description: {
-    fontSize: 48,
+    fontSize: 36,
     textAlign: 'center'
   },
 
   highLowWrapper: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop:25
+
   },
 
   bodyWrapper:{
     justifyContent: 'flex-end',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    marginTop: 25
   }
 
 

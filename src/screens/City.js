@@ -1,11 +1,14 @@
 import React from "react";
 import { View, StyleSheet, ImageBackground, Text } from "react-native";
 import IconText from "../components/IconText";
+import moment from "moment";
 
 
-const City = () => {
+const City = ({cityInfo}) => {
 
     const {container, allComps, imageLayout, suns, cityText, popStyle } = styles
+    const {name, country, population, sunrise, sunset} = cityInfo
+    
     return (
 
         <View style = {container} >
@@ -14,18 +17,26 @@ const City = () => {
 
                 <View style = {allComps}>
 
-                    <Text style = {cityText}>Tokyo</Text>
+                    <Text style = {cityText}>{`${name}, ${country}`}</Text>
                     
                     <IconText iconName = {'user'} 
                       iconSize = {50}
                       iconColor = {'white'}
-                      text = {'3.4M'} 
-                      itemStyle = {popStyle}></IconText> 
+                      text = {population} 
+                      itemStyle = {popStyle}/>
 
                     <View style= {suns}>
 
-                        <IconText iconName = {'sunrise'} iconSize = {50} iconColor = {'white'} text = {'6:43 AM'}></IconText>
-                        <IconText iconName = {'sunset'} iconSize = {50} iconColor = {'white'} text = {'8:28 PM'}></IconText>
+                        <IconText 
+                        iconName = {'sunrise'} 
+                        iconSize = {50} 
+                        iconColor = {'white'} 
+                        text = {moment.unix(sunrise).format('hh:mm a')}></IconText>
+                        <IconText 
+                        iconName = {'sunset'} 
+                        iconSize = {50} 
+                        iconColor = {'white'} 
+                        text = {moment.unix(sunset).format('hh:mm a')}></IconText>
                     
                     </View>
 
@@ -44,7 +55,7 @@ const City = () => {
 }
 
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
     container: {
 

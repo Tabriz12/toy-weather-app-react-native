@@ -9,7 +9,7 @@ const IconText = (props) => {
 
     const {iconName, iconSize, iconColor, text, itemStyle } = props
 
-    const {container, txtTheme} = iconStyles
+    const {container, txtTheme} = styles
 
     return(
 
@@ -28,10 +28,10 @@ const IconText = (props) => {
 }
 
 
-iconStyles = StyleSheet.create({
+const styles = StyleSheet.create({
     container:{
         alignItems: 'center',
-        //
+        
     },
 
     txtTheme:{
